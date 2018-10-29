@@ -5,8 +5,10 @@ const svg = canvas
   .attr("height", 600)
   .attr("width", 600);
 
+const group = svg.append("g").attr("transform", "translate(0,100)");
+
 // append shapes to svg container
-svg
+group
   .append("rect")
   .attr("height", 100)
   .attr("width", 200)
@@ -14,14 +16,14 @@ svg
   .attr("x", 20)
   .attr("y", 20);
 
-svg
+group
   .append("circle")
   .attr("r", 50)
   .attr("cx", 300)
   .attr("cy", 70)
   .attr("fill", "pink");
 
-svg
+group
   .append("line")
   .attr("x1", 370)
   .attr("x2", 400)
