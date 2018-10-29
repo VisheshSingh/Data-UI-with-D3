@@ -1,4 +1,8 @@
-const a = document.querySelector('div');
-const b =  d3.select('div');
+const canvas = d3.select(".canvas");
 
-console.log(a,b);
+const svg = canvas.append("svg");
+
+// append shapes to svg container
+svg.append("rect");
+svg.append("circle");
+svg.append("line");
