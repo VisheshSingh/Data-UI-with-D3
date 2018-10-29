@@ -1,26 +1,22 @@
-const data = [
-  { width: 200, height: 100, fill: "teal" },
-  { width: 100, height: 50, fill: "pink" },
-  { width: 50, height: 30, fill: "red" }
-];
-
+// select the svg container
 const svg = d3.select("svg");
 
-const rect = svg
-  .selectAll("rect")
-  .data(data)
-  .attr("height", (d, i, n) => {
-    // console.log(n[i]);
-    return d.height;
-  })
-  .attr("width", d => d.width)
-  .attr("fill", d => d.fill);
+d3.json("planets.json").then(data => {
+  const circle = svg.selectAll("circle").data(data);
 
-// console.log(rect);
+  // add attrs to circle in DOM
+  circle
+    .attr("cx", d => d.distance)
+    .attr("cy", 200)
+    .attr("r", d => d.radius)
+    .attr("fill", d => d.fill);
 
-rect
-  .enter()
-  .append("rect")
-  .attr("height", (d, i, n) => d.height)
-  .attr("width", d => d.width)
-  .attr("fill", d => d.fill);
+  // add enter selection to DOM
+  circle
+    .enter()
+    .append("circle")
+    .attr("cx", d => d.distance)
+    .attr("cy", 200)
+    .attr("r", d => d.radius)
+    .attr("fill", d => d.fill);
+});
