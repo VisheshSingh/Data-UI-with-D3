@@ -1,16 +1,15 @@
-const data = [{ width: 200, height: 100, fill: "purple" }];
+const data = [{ width: 200, height: 100, fill: "teal" }];
 
 const svg = d3.select("svg");
 
-svg
+const rect = svg
   .select("rect")
   .data(data)
-  .attr("height", function(d) {
+  .attr("height", (d, i, n) => {
+    console.log(n[i]);
     return d.height;
   })
-  .attr("width", function(d) {
-    return d.width;
-  })
-  .attr("fill", function(d) {
-    return d.fill;
-  });
+  .attr("width", d => d.width)
+  .attr("fill", d => d.fill);
+
+console.log(rect);
