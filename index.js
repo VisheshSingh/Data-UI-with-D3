@@ -16,4 +16,11 @@ const rect = svg
   .attr("width", d => d.width)
   .attr("fill", d => d.fill);
 
-console.log(rect);
+// console.log(rect);
+
+rect
+  .enter()
+  .append("rect")
+  .attr("height", (d, i, n) => d.height)
+  .attr("width", d => d.width)
+  .attr("fill", d => d.fill);
