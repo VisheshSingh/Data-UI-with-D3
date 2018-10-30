@@ -16,20 +16,19 @@ const graph = svg
   .attr("height", graphHeight)
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+const xAxisGroup = graph
+  .append("g")
+  .attr("transform", `translate(0, ${graphHeight})`);
+
+const yAxisGroup = graph.append("g");
+
 // Get external json
 d3.json("menu.json").then(data => {
   // Create a linear scale
   const y = d3
     .scaleLinear()
     .domain([0, d3.max(data, d => d.orders)])
-    .range([0, 500]);
-
-  // Min, Max and Extent
-  // const min = d3.min(data, d => d.orders);
-  // const max = d3.max(data, d => d.orders);
-  // const extent = d3.extent(data, d => d.orders);
-
-  // console.log(min, max, extent);
+    .range([0, graphHeight]);
 
   // create a band scale
   const x = d3
@@ -57,4 +56,11 @@ d3.json("menu.json").then(data => {
     .attr("height", d => y(d.orders))
     .attr("x", d => x(d.name))
     .attr("fill", "orange");
+
+  //create and call the axes
+  const xAxis = d3.axisBottom(x);
+  const yAxis = d3.axisLeft(y);
+
+  xAxisGroup.call(xAxis);
+  yAxisGroup.call(yAxis);
 });
