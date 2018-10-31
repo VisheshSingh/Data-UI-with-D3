@@ -81,17 +81,12 @@ const update = data => {
   yAxisGroup.call(yAxis);
 };
 
+var data = [];
+
 // Get external data from firestore
-db.collection("dishes")
-  .get()
-  .then(res => {
-    let data = [];
-    res.docs.forEach(doc => data.push(doc.data()));
-
-    update(data);
-
-    d3.interval(() => {
-      data.pop();
-      update(data);
-    }, 2000);
+db.collection("dishes").onSnapshot(res => {
+  res.docChanges().forEach(change => {
+    console.log(change.doc.data());
+    // update(data);
   });
+});
