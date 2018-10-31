@@ -73,13 +73,14 @@ const update = data => {
   rects
     .enter()
     .append("rect")
-    .attr("width", x.bandwidth)
+    .attr("width", 0)
     .attr("height", 0)
     .attr("fill", "orange")
     .attr("x", d => x(d.name))
     .attr("y", graphHeight)
     .merge(rects)
     .transition(t)
+    .attrTween("width", widthTween)
     .attr("height", d => graphHeight - y(d.orders))
     .attr("y", d => y(d.orders));
 
@@ -111,3 +112,13 @@ db.collection("dishes").onSnapshot(res => {
     update(data);
   });
 });
+
+// TWEENS
+
+const widthTween = d => {
+  const i = d3.interpolate(0, x.bandwidth());
+
+  return function(t) {
+    return i(t);
+  };
+};
