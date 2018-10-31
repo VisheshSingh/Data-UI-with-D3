@@ -56,7 +56,7 @@ const update = data => {
   const rects = graph.selectAll("rect").data(data);
 
   //3. remove unwnted shapes with exit selection
-  // rects.exit().remove();
+  rects.exit().remove();
 
   //4. update the current shapes in DOM
   rects
@@ -91,7 +91,7 @@ db.collection("dishes")
     update(data);
 
     d3.interval(() => {
-      data[0].orders += 50;
+      data.pop();
       update(data);
-    }, 1000);
+    }, 2000);
   });
